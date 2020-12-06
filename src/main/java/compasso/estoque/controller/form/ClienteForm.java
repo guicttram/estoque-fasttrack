@@ -5,8 +5,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import compasso.estoque.models.Cliente;
-
 public class ClienteForm {
 
 	@NotNull
@@ -16,8 +14,15 @@ public class ClienteForm {
 	@NotEmpty
 	@Length(min = 11, max = 11)
 	private String cpf;
-	private String endereco;
-	private String cidade;
+	
+	@NotNull
+	@NotEmpty
+	private String numero;
+	
+	@NotNull
+	@NotEmpty
+	@Length(min = 8, max = 8)
+	private String cep;
 
 	public String getNome() {
 		return nome;
@@ -35,24 +40,20 @@ public class ClienteForm {
 		this.cpf = cpf;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public Cliente converter() {
-		return new Cliente(nome, cpf, endereco, cidade);
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 }

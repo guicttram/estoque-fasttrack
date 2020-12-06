@@ -9,6 +9,7 @@ public class Loja {
 	private String nome;
 	private String endereco;
 	private String cidade;
+	private String cep;
 	@Id
 	private String cnpj;
 	
@@ -32,13 +33,6 @@ public class Loja {
 	public Loja() {
 		
 	}
-
-	public Loja(String nome, String endereco, String cidade, String cnpj) {
-		this.nome = nome;
-		this.endereco = endereco;
-		this.cidade = cidade;
-		this.cnpj = cnpj;
-	}
 	
 	public String getNome() {
 		return nome;
@@ -58,6 +52,14 @@ public class Loja {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 	
 

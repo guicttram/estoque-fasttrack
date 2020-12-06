@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import compasso.estoque.client.ViaCepClient;
+import compasso.estoque.client.response.ViaCepResponse;
 import compasso.estoque.controller.dto.LojaDto;
 import compasso.estoque.controller.form.AtualizarLojaForm;
 import compasso.estoque.controller.form.LojaForm;
@@ -29,6 +31,9 @@ import compasso.estoque.repository.VendedorRepository;
 @RestController
 @RequestMapping("/lojas")
 public class LojasController {
+	
+	@Autowired
+	private ViaCepClient viaCepClient;
 
 	@Autowired
 	private LojaRepository lojaRepository;
@@ -47,7 +52,15 @@ public class LojasController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<LojaDto> cadastrar(@RequestBody @Valid LojaForm form, UriComponentsBuilder uriBuilder) {
-		Loja loja = form.converter();
+		Loja loja = new Loja();
+		loja.setNome(form.getNome());
+		loja.setCnpj(form.getCnpj());
+		loja.setCep(form.getCep());
+		
+		ResponseEntity<ViaCepResponse> buscaCep = viaCepClient.buscaCep(form.getCep());
+		loja.setEndereco(buscaCep.getBody().getLogradouro() + ", " + form.getNumero());
+		loja.setCidade(buscaCep.getBody().getLocalidade());
+ 		
 		lojaRepository.save(loja);
 
 		URI uri = uriBuilder.path("/lojas/{cnpj}").buildAndExpand(loja.getCnpj()).toUri();

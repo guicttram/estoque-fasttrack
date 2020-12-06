@@ -11,20 +11,34 @@ public class Cliente {
 	private String cpf;
 	private String endereco;
 	private String cidade;
+	private String cep;
 	
 	public Cliente() {
 		
 	}
-	
-	public Cliente(String nome, String cpf, String endereco, String cidade) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.cidade = cidade;
-	}
+//	
+//	public Cliente(String nome, String cpf, String endereco, String cep) {
+//		this.nome = nome;
+//		this.cpf = cpf;
+//		this.endereco = endereco;
+//		this.cidade = cep.getCidade();
+//		this.cep = cep;
+//	}
 
 	public String getNome() {
 		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getEndereco() {
@@ -43,9 +57,14 @@ public class Cliente {
 		this.cidade = cidade;
 	}
 
-	public String getCpf() {
-		return this.cpf;
+	public String getCep() {
+		return cep;
 	}
+
+	public void setCep(String string) {
+		this.cep = string;
+	}
+
 	
 	
 

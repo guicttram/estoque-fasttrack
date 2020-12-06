@@ -9,6 +9,7 @@ public class Fornecedor {
 	@Id
 	private String nome;
 	private String endereco;
+
 	
 	public Fornecedor(String nome, String endereco) {
 		this.nome = nome;
