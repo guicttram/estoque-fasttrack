@@ -25,6 +25,7 @@ import compasso.estoque.controller.form.AtualizarClienteForm;
 import compasso.estoque.controller.form.ClienteForm;
 import compasso.estoque.models.Cliente;
 import compasso.estoque.repository.ClienteRepository;
+import compasso.estoque.service.ClienteServiceImpl;
 
 @RestController
 @RequestMapping("/clientes")
@@ -46,16 +47,9 @@ public class ClientesController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder) {
-		Cliente cliente = new Cliente();
-		cliente.setNome(form.getNome());
-		cliente.setCpf(form.getCpf());
-		cliente.setCep(form.getCep());
-		
 	
 		ResponseEntity<ViaCepResponse> buscaCep = viaCepClient.buscaCep(form.getCep());
-		cliente.setEndereco(buscaCep.getBody().getLogradouro() + ", " + form.getNumero());
-		cliente.setCidade(buscaCep.getBody().getLocalidade());
-		
+		Cliente cliente = new ClienteServiceImpl().criaCliente(form, buscaCep);	
 		clienteRepository.save(cliente);
 
 		URI uri = uriBuilder.path("/clientes/{cpf}").buildAndExpand(cliente.getCpf()).toUri();
