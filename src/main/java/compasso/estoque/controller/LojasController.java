@@ -27,6 +27,7 @@ import compasso.estoque.models.Loja;
 import compasso.estoque.models.Vendedor;
 import compasso.estoque.repository.LojaRepository;
 import compasso.estoque.repository.VendedorRepository;
+import compasso.estoque.service.LojaServiceImpl;
 
 @RestController
 @RequestMapping("/lojas")
@@ -52,15 +53,9 @@ public class LojasController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<LojaDto> cadastrar(@RequestBody @Valid LojaForm form, UriComponentsBuilder uriBuilder) {
-		Loja loja = new Loja();
-		loja.setNome(form.getNome());
-		loja.setCnpj(form.getCnpj());
-		loja.setCep(form.getCep());
-		
+	
 		ResponseEntity<ViaCepResponse> buscaCep = viaCepClient.buscaCep(form.getCep());
-		loja.setEndereco(buscaCep.getBody().getLogradouro() + ", " + form.getNumero());
-		loja.setCidade(buscaCep.getBody().getLocalidade());
- 		
+		Loja loja = new LojaServiceImpl().criaLoja(form, buscaCep);
 		lojaRepository.save(loja);
 
 		URI uri = uriBuilder.path("/lojas/{cnpj}").buildAndExpand(loja.getCnpj()).toUri();

@@ -8,6 +8,6 @@ import compasso.estoque.models.Cliente;
 
 public interface ClienteService {
 	
-	public abstract Cliente criaCliente(ClienteForm form, ResponseEntity<ViaCepResponse> buscaCep);
+	public Cliente criaCliente(ClienteForm form, ResponseEntity<ViaCepResponse> buscaCep);
 
 }

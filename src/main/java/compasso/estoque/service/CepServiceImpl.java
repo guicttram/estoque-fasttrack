@@ -1,9 +1,11 @@
 package compasso.estoque.service;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import compasso.estoque.client.response.ViaCepResponse;
 
+@Service
 public class CepServiceImpl implements CepService {
 
 	@Override
