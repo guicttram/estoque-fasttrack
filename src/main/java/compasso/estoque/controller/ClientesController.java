@@ -21,7 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import compasso.estoque.client.ViaCepClient;
 import compasso.estoque.client.response.ViaCepResponse;
 import compasso.estoque.controller.dto.ClienteDto;
-import compasso.estoque.controller.form.AtualizarClienteForm;
+import compasso.estoque.controller.form.AtualizarForm;
 import compasso.estoque.controller.form.ClienteForm;
 import compasso.estoque.models.Cliente;
 import compasso.estoque.repository.ClienteRepository;
@@ -67,8 +67,10 @@ public class ClientesController {
 	@PutMapping("/{cpf}")
 	@Transactional
 	public ResponseEntity<ClienteDto> atualizar(@PathVariable String cpf,
-			@RequestBody @Valid AtualizarClienteForm form) {
-		Cliente cli = form.atualizar(cpf, clienteRepository);
+			@RequestBody @Valid AtualizarForm form) {
+		ResponseEntity<ViaCepResponse> buscaCep = viaCepClient.buscaCep(form.getCep());
+		Cliente cli = form.atualizarCliente(cpf, clienteRepository, buscaCep);
+		clienteRepository.save(cli);
 		return ResponseEntity.ok(new ClienteDto(cli));
 	}
 

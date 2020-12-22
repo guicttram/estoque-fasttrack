@@ -1,6 +1,5 @@
 package compasso.estoque.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +9,6 @@ import compasso.estoque.models.Cliente;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
-
-	@Autowired
-	private CepServiceImpl cepService;
 	
 	@Override
 	public Cliente criaCliente(ClienteForm form, ResponseEntity<ViaCepResponse> buscaCep) {
@@ -20,8 +16,8 @@ public class ClienteServiceImpl implements ClienteService {
 		cliente.setNome(form.getNome());
 		cliente.setCpf(form.getCpf());
 		cliente.setCep(form.getCep());
-		cliente.setEndereco(cepService.criaRua(buscaCep) + ", " + form.getNumero());
-		cliente.setCidade(cepService.criaCidade(buscaCep));
+		cliente.setEndereco(buscaCep.getBody().getLogradouro() + ", " + form.getNumero());
+		cliente.setCidade(buscaCep.getBody().getLocalidade());
 		
 		return cliente;
 	}

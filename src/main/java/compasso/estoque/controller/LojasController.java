@@ -21,7 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import compasso.estoque.client.ViaCepClient;
 import compasso.estoque.client.response.ViaCepResponse;
 import compasso.estoque.controller.dto.LojaDto;
-import compasso.estoque.controller.form.AtualizarLojaForm;
+import compasso.estoque.controller.form.AtualizarForm;
 import compasso.estoque.controller.form.LojaForm;
 import compasso.estoque.models.Loja;
 import compasso.estoque.models.Vendedor;
@@ -71,8 +71,10 @@ public class LojasController {
 	
 	@PutMapping("/{cnpj}")
 	@Transactional
-	public ResponseEntity<LojaDto> atualizar(@PathVariable String cnpj, @RequestBody @Valid AtualizarLojaForm form){
-		Loja loja = form.atualizar(cnpj, lojaRepository);
+	public ResponseEntity<LojaDto> atualizar(@PathVariable String cnpj, @RequestBody @Valid AtualizarForm form){
+		ResponseEntity<ViaCepResponse> buscaCep = viaCepClient.buscaCep(form.getCep());
+		Loja loja = form.atualizarLoja(cnpj, lojaRepository, buscaCep);
+		lojaRepository.save(loja);
 		return ResponseEntity.ok(new LojaDto(loja));
 	}
 	

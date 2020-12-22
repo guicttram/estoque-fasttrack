@@ -16,14 +16,6 @@ public class Cliente {
 	public Cliente() {
 		
 	}
-//	
-//	public Cliente(String nome, String cpf, String endereco, String cep) {
-//		this.nome = nome;
-//		this.cpf = cpf;
-//		this.endereco = endereco;
-//		this.cidade = cep.getCidade();
-//		this.cep = cep;
-//	}
 
 	public String getNome() {
 		return nome;

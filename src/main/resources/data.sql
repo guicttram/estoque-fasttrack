@@ -4,8 +4,8 @@ INSERT INTO LOJA(nome, endereco, cidade, cep, cnpj) VALUES('Renner', 'Av. Brasil
 INSERT INTO VENDEDOR(nome, salario, comissao, loja_cnpj) VALUES('João Silva', '2560.29', '347.77', '25600150000167');
 INSERT INTO VENDEDOR(nome, salario, comissao, loja_cnpj) VALUES('Maria Almeida', '2589.99', '466.63', '17140918000139');
 
-INSERT INTO CLIENTE(nome, cpf, endereco, cep, cidade) VALUES('Leonardo Marcondes', '27566027018', 'Rua Paissandu, 306', '99010035', 'Passo Fundo');
-INSERT INTO CLIENTE(nome, cpf, endereco, cep, cidade) VALUES('Maria Luísa Amaral', '44599090069', 'Rua General, 745', '99010035', 'Marau');
+INSERT INTO CLIENTE(nome, cpf, endereco, cep, cidade) VALUES('Leonardo Marcondes', '27566027018', 'Rua Paissandu, 306', '99010035', 'Mato Castelhano');
+INSERT INTO CLIENTE(nome, cpf, endereco, cep, cidade) VALUES('Manuela Ceratti', '44599090069', 'Av. Sete de Setembro, 360', '99010121', 'Passo Fundo');
 
 INSERT INTO CATEGORIA(nome, descricao) VALUES('Eletrodomésticos', 'Produtos para a casa com diferentes voltagens e potências');
 INSERT INTO CATEGORIA(nome, descricao) VALUES('Roupas', 'Produtos para todos os corpos, com qualidade e estilo');
